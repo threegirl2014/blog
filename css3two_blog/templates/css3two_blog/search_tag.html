@@ -1,0 +1,47 @@
+{% extends 'css3two_blog/blog_base.html' %}
+{% load static %}
+
+{% block pagecss %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/archive.css' %}" />
+{% endblock pagecss %}
+
+{% block content %}
+<div>
+  <script type="text/javascript">
+
+  </script>
+
+    <article role="article">
+      <header id="category">
+        <h1 class="entry-title">
+          TAG: {{tag.name}}
+        </h1>
+      </header>
+      <div id="blog-archives">
+        {% for year, blogs in bloglist %}
+          <h2>{{year}}</h2>
+          {% for blog in blogs %}
+            <article>
+              <h1>
+                <a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
+              </h1>
+              <time datetime="{{ blog.pub_date }}">
+                <span class="month">{{ blog.pub_date|date:"M"|upper }}</span>
+                <span class="day">{{ blog.pub_date.day }}</span>
+              </time>
+              <footer>
+                <span class="tags">
+                  Tags: 
+                  {% for tag in blog.tags.all %}
+                    <a href="{% url 'tag' name=tag.name %}">{{ tag.name }}</a>
+                  {% endfor %}
+                </span>
+              </footer>
+            </article>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </article>
+
+</div>
+{% endblock content %}

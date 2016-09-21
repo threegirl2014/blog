@@ -1,0 +1,48 @@
+{% extends "css3two_blog/blog_base.html" %}
+{% load static %}
+
+{% block content %}
+  <article>
+  	<h2>Contact me</h2>
+    <p>To send me a message fill out the below form.</p>
+	<form action="" method="post">
+	{% csrf_token %}
+	{{ form.non_field_errors }}
+	{% for field in form %}
+		<div class="fieldWrapper">
+	    {{ field.errors }}
+	    <p style="line-height: 20px; padding-bottom: 1px" for="{{ field.id_for_label }}">{{ field.label }}</p>
+	    {{ field }}
+		</div>
+	{% endfor %}
+<!--	
+	<div class="fieldWrapper">
+	    {{ form.subject.errors }}
+	    <p style="line-height: 20px; padding-bottom: 1px" for="{{ form.subject.id_for_label }}">Email subject:</p>
+	    {{ form.subject }}
+	</div>
+	<div class="fieldWrapper">
+	    {{ form.message.errors }}
+	    <p style="line-height: 20px; padding-bottom: 1px" for="{{ form.message.id_for_label }}">Your message:</p>
+	    {{ form.message }}
+	</div>
+	<div class="fieldWrapper">
+	    {{ form.email.errors }}
+	    <p style="line-height: 20px; padding-bottom: 1px" for="{{ form.email.id_for_label }}">Your email address:</p>
+	    {{ form.email }}
+	</div>
+	<div class="fieldWrapper">
+	    {{ form.name.errors }}
+	    <p style="line-height: 20px; padding-bottom: 1px" for="{{ form.name.id_for_label }}">Your name:</p>
+	    {{ form.name }}
+	</div>	
+	<div class="fieldWrapper">
+	    {{ form.cc_myself.errors }}
+	    <p style="line-height: 20px; padding-bottom: 1px" for="{{ form.cc_myself.id_for_label }}">CC yourself?</p>
+	    {{ form.cc_myself }}
+	</div>
+-->
+	<input style="width:100px;height:30px" type="submit" value="Submit">
+	</form>
+ </article>
+{% endblock content %}

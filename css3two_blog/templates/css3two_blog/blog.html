@@ -1,0 +1,48 @@
+{% extends 'css3two_blog/blog_base.html' %}
+{% load static %}
+{% load custom_markdown %}
+
+{% block head %}
+  <title>{{ blog.title }} - Threegirl's blog</title>
+  <meta name="description" content={{ blog.description }}>
+{% endblock head %}
+
+{% block pagecss %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/gfm.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/article.css' %}" />
+{% endblock pagecss %}
+
+{% block content %}
+{% autoescape off %}
+  <article>
+    <header>
+      <p class="meta">
+        <time pubdate="{{ blog.pub_date }}" data-updated="{{ blog.last_edit_date }}">
+          {{ blog.pub_date|date:'M'|upper }}
+          {{ blog.pub_date|date:"dS"|upper }}, {{ blog.pub_date.year }}
+        </time>
+      </p>
+      <h1 class="title"><b>{{ blog.title }}</b></h1>
+    </header>
+    {{ blog.body|custom_markdown }}
+    {% include 'css3two_blog/duoshuo.html' %}
+<!--
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'gushenwei'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'https://a.disquscdn.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+-->
+  </article>
+{% endautoescape %}
+
+{% endblock content %}

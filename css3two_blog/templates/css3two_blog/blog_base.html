@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+<head>
+  {% block head %}
+    <title>顾慎为的博客</title>
+    <meta name="description" content="顾慎为的博客，关于技术，生活的感悟" />
+  {% endblock head %}
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'css3two_blog/images/headicon.jpg' %}"/>
+  <meta name="keywords" content="顾慎为，技术，生活" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/style.css' %}" />
+  <!-- modernizr enables HTML5 elements and feature detects -->
+  <script type="text/javascript" src="{% static 'css3two_blog/js/modernizr-1.5.min.js' %}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/hybrid.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/gfm.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/article.css' %}" /> 
+   <link rel="stylesheet" href="http://picturebag.qiniudn.com/monokai.css">
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  {% block pagecss %}
+
+  {% endblock pagecss %}
+  <!-- Google Analytics -->
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-69544114-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='//www.google-analytics.com/analytics.js'></script>
+  <!-- End Google Analytics -->
+</head>
+
+<body>
+  <div id="main" style="position: relative;">
+    <a href="https://github.com/threegirl2014">
+      <img style="position: absolute; top: 0; right: 0; border: 0;"
+           src="{% static 'css3two_blog/images/forkme.png' %}"
+           alt="Fork me on GitHub">
+    </a>
+    <header>
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="{% url 'home' %}">Threegirl's<span class="logo_colour"> Blog</span></a></h1>
+          <h2>talk is cheap, show me the code.</h2>
+        </div>
+      </div>
+      <nav>
+        <div id="menu_container">
+          <ul class="sf-menu" id="nav">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'archive' %}">Archives</a></li>
+            <li><a href="#">Category</a>
+              <ul>
+                {% for category in categorys %}
+                    <li><a href="{% url 'category' name=category.short_name%}">{{category.name}}</a></li>
+                {% endfor %}
+                
+<!--
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a>
+                  <ul>
+                    <li><a href="#">2.1</a></li>
+                    <li><a href="#">2.2</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">3</a></li>
+-->
+              </ul>
+            </li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="{% url 'contact' %}">Contact Me</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div id="site_content">
+      <div class="content_container">
+        <span class="toggle-sidebar" style="height: 3301.7px; background-color: rgb(240, 240, 240);"></span>
+        <div class="content">
+            {% block content %}
+              Need to be filled by each page.     <!-- content should be written by myself  -->
+            {% endblock content %}
+            <br>
+        </div>
+    </div>
+      <aside id="sidebar_container">
+        <div class="sidebar">
+          <div class="bio" data-twttr-id="twttr-sandbox-0">
+            <div class="illustration">
+              <img src="/static/css3two_blog/images/thumbnail.jpg" alt="gushenwei">
+              <h2 id="hi">Hi, I'm gushenwei</h2>
+            </div>
+            <div class="clear"></div>
+            <p>
+              I code in Python.
+              <br>
+              Live in Shanghai.
+              <br>
+              信仰：苟利国家生死以，岂因祸福避趋之
+            </p>
+            <!-- StackExchange User Flair http://stackoverflow.com/users/flair -->
+<!--
+            <a href="http://stackoverflow.com/users/2142577/laike9m" target="_blank">
+              <img src="https://stackoverflow.com/users/flair/2142577.png" width="208" height="58"
+                   alt="profile for laike9m on Stack Exchange, a network of free, community-driven Q&amp;A sites"
+                   title="profile for laike9m on Stack Exchange, a network of free, community-driven Q&amp;A sites">
+            </a>
+-->
+            
+            <!--https://github.com/lepture/github-cards -->
+{#            <div class="github-card" data-user="laike9m" data-target="blank"></div>#}
+{#            <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>#}
+            <div id="social-logos">
+              <a href="mailto:gushenwei2014@gmail.com" target="_blank">
+                <img src="{% static 'css3two_blog/images/webicon-mail-m.png' %}" alt="E-mail">
+              </a>
+              <a href="{% url 'feed' %}" title="my feed" target="_blank">
+                <img src="{% static 'css3two_blog/images/webicon-rss-m.png' %}" alt="RSS feed">
+              </a>
+              <a href="https://github.com/threegirl2014" title="gushenwei on GitHub" target="_blank">
+                <img src="{% static 'css3two_blog/images/webicon-github-m.png' %}" alt="GitHub logo">
+              </a>
+            <form action="{% url 'search_blog' %}" method="get">
+              <label><h3>Search<h3></label>
+              <input type="text" name="s" placeholder="Search in blog title">
+            </form>
+<!--
+              <a href="http://stackoverflow.com/users/2142577/laike9m" title="laike9m on stackoverflow" target="_blank">
+                <img src="{% static 'css3two_blog/images/webicon-stackoverflow-m.png' %}" alt="GitHub logo">
+              </a>
+              <a href="https://twitter.com/laike9m" title="laike9m on Twitter" target="_blank">
+                <img src="{% static 'css3two_blog/images/webicon-twitter-m.png' %}" alt="Twitter logo">
+              </a>
+              <a href="https://plus.google.com/u/0/+Yaolaike9mZuo/posts" title="laike9m on Google+" target="_blank">
+                <img src="{% static 'css3two_blog/images/webicon-googleplus-m.png' %}" alt="Google+ logo">
+              </a>
+              <a href="http://www.linkedin.com/profile/view?id=242350350" title="laike9m on LinkedIn" target="_blank">
+                <img src="{% static 'css3two_blog/images/webicon-linkedin-m.png' %}" alt="LinkedIn logo">
+              </a>
+-->
+            </div>
+            <div style="margin-top: 15px">
+              <!-- Begin MailChimp Signup Form -->
+              <style type="text/css">
+                #mc_embed_signup {clear:left; font:14px Cambria, Helvetica, Arial, sans-serif; }
+                #mc_embed_signup form {display:block; position:relative; text-align:left; padding:10px 0 10px 0}
+                #mc_embed_signup h2 {font-weight:bold; padding:0; margin:15px 0; font-size:1.4em;}
+                #mc_embed_signup input {border:1px solid #999; -webkit-appearance:none;}
+                #mc_embed_signup input[type=checkbox]{-webkit-appearance:checkbox;}
+                #mc_embed_signup input[type=radio]{-webkit-appearance:radio;}
+                #mc_embed_signup input:focus {border-color:#333;}
+                #mc_embed_signup .button {clear:both; background-color: #aaa; border: 0 none; border-radius:4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size:15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding:0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: auto;}
+                #mc_embed_signup .button:hover {background-color:#777;}
+                #mc_embed_signup .small-meta {font-size: 11px;}
+                #mc_embed_signup .nowrap {white-space:nowrap;}
+                #mc_embed_signup .clear {clear:none; display:inline;}
+                #mc_embed_signup label {display:block; font-size:16px; padding-bottom:10px; font-weight:bold;}
+                #mc_embed_signup input.email {display:block; padding:8px 0; margin:0 4% 10px 0; text-indent:5px; width:58%; min-width:130px;}
+                #mc_embed_signup input.button {display:block; width:35%; margin:0 0 10px 0; min-width:90px;}
+                #mc_embed_signup div#mce-responses {float:left; top:-1.4em; padding:0 .5em 0 .5em; overflow:hidden; width:90%;margin: 0 5%; clear: both;}
+                #mc_embed_signup div.response {margin:1em 0; padding:1em .5em .5em 0; font-weight:bold; float:left; top:-1.5em; z-index:1; width:80%;}
+                #mc_embed_signup #mce-error-response {display:none;}
+                #mc_embed_signup #mce-success-response {color:#529214; display:none;}
+                #mc_embed_signup label.error {display:block; float:none; width:auto; margin-left:1.05em; text-align:left; padding:.5em 0;}
+              </style>
+              <!--<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">-->
+<!--
+              <div id="mc_embed_signup">
+              <form action="//laike9m.us3.list-manage.com/subscribe/post?u=292026f5547a0cbd3ec8e9f6d&amp;id=416f7bcbc7" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <label for="mce-EMAIL">
+                  Sign up for laike9m.com email newsletter
+                  <span style="font-size: 1px">(limit to tech-related articles)</span>
+                </label>
+                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+-->
+                  <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+<!--
+                  <div style="position: absolute; left: -5000px;"><input type="text" name="b_292026f5547a0cbd3ec8e9f6d_416f7bcbc7" value=""></div>
+                <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+              </form>
+              </div>
+-->
+              <!--End mc_embed_signup-->
+            </div>
+            <br />
+<!--
+            <div id="blogroll">
+              <h2 style="font-size:18px; color: #333333">Blogroll</h2>
+              <p>
+                <a href="http://blog.binux.me" target="_blank">Binuxの杂货铺</a>
+              </p>              
+            </div>
+-->
+          </div>
+        <!-- end about me -->
+        </div>
+      </aside>
+
+    </div>
+
+    <div id="scroll">
+      <a title="Scroll to the top" class="top" href="#">
+        <img src="{% static 'css3two_blog/images/top.png' %}" alt="top" />
+      </a>
+    </div>
+    <footer id="site-footer" style="padding-bottom: 20px">
+      <p>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="{% url 'archive' %}">Archives</a> |
+        <a href="/blog/about">About</a> |
+        <a href="">Projects</a> |
+        <a href="{% url 'contact' %}">Contact
+        </a>
+      </p>
+      <p>
+        <a href="#">SourceCode@Github</a> |
+        <a href="#">Hosted on XXX</a> |
+        <a href="http://www.css3templates.co.uk">design from css3templates.co.uk</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="{% static 'css3two_blog/js/jquery-2.0.3.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'css3two_blog/js/jquery-ui.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'css3two_blog/js/jquery.easing-sooper.js' %}"></script>
+  <script type="text/javascript" src="{% static 'css3two_blog/js/jquery.sooperfish.js' %}"></script>
+  <script type="text/javascript">
+    var sidebar = $('.toggle-sidebar');
+    $(document).ready(function() {
+      $('ul.sf-menu').sooperfish();
+      $('.top').click(function() {$('html, body').animate({scrollTop: 0}, 1000); return false;});
+    });
+    $(window).load(function(){  // run this only after the entire page has loaded to get real height
+        var toggle_height = $(".content").prop('scrollHeight') + 13.7;
+        sidebar.css("height", toggle_height);
+    });
+    sidebar.hover( // use jquery-ui
+        function(){
+            $(this).animate({ backgroundColor: '#EBEBEB' }, 10);
+        },
+        function(){
+            $(this).animate({ backgroundColor: '#f0f0f0' }, 10);
+        }
+    );
+    $.fn.clicktoggle = function(a, b) {
+        return this.each(function() {
+            var clicked = false;
+            $(this).click(function() {
+                if (clicked) {
+                    clicked = false;
+                    return b.apply(this, arguments);
+                }
+                clicked = true;
+                return a.apply(this, arguments);
+            });
+        });
+    };
+    sidebar.clicktoggle(
+        function(){
+            $('.content_container').css("margin-right", "11px");
+            $(this).css("width", "19px");
+            $('span.toggle-sidebar').addClass('alignright');
+        },
+        function(){  // return to original style
+            $('.content_container').css("margin-right", "295px");
+            $(this).css("width", "9px");
+            $('span.toggle-sidebar').removeClass('alignright');
+        }
+    );
+  </script>
+</body>
+</html>

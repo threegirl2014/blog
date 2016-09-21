@@ -1,0 +1,43 @@
+{% extends 'css3two_blog/blog_base.html' %}
+{% load static %}
+{% load custom_markdown %}
+
+{% block pagecss %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/gfm.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css3two_blog/css/article.css' %}" />
+{% endblock pagecss %}
+
+{% block content %}
+<div class="blog-index">
+{% for blog in blog_list.object_list %}
+    {% autoescape off %}
+      <article>
+        <header>
+          <p class="meta">
+            <time pubdate="{{ blog.pub_date }}" data-updated="{{ blog.last_edit_date }}">
+              {{ blog.pub_date|date:'M'|upper }}
+              {{ blog.pub_date|date:"dS"|upper }}, {{ blog.pub_date.year }}
+            </time>
+          </p>
+          <h1 class="title-link">
+            <a href="{{ blog.get_absolute_url }}"><b>{{ blog.title }}</b></a>
+          </h1>
+        </header>
+        {{ blog.body|custom_markdown|truncatewords_html:100 }}
+      </article>
+    {% endautoescape %}
+{% endfor %}
+  <div class="pagination">
+    {% if blog_list.has_previous  %}
+      <a class="next" href="{% url 'index' page=blog_list.previous_page_number %}">← Newer</a>
+    {% endif %}
+    <a href="/blog/archive">Blog Archives</a>
+    {% if blog_list.has_next %}
+      <a class="prev" href="{% url 'index' page=blog_list.next_page_number %}">Older →</a>
+    {% endif %}
+    
+
+
+  </div>
+</div>
+{% endblock content %}
